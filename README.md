@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h1 align="center">Hack36</h1>
 <p align="center">
 </p>
@@ -125,3 +126,6 @@ Courtesy - https://console.cloud.google.com/apis
 
  
 
+=======
+# aihealth-apps
+>>>>>>> 4f8748a39fad58684ec6b7bc330142d80c85fafe
