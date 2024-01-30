@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "788287173523",
+    "firebase_url": "https://aihealth-404413-default-rtdb.firebaseio.com",
+    "project_id": "aihealth-404413",
+    "storage_bucket": "aihealth-404413.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788287173523:android:0bac5ce989df3873b02e66",
+        "android_client_info": {
+          "package_name": "com.example.caress"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788287173523-4vthfn0lorlom4q5927brgmk0uih3fbi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.caress",
+            "certificate_hash": "b64b3eb9082edc622f0d6937811f78344c29e389"
+          }
+        },
+        {
+          "client_id": "788287173523-6v7g83isgk1jem7a2t1g349siv7m23uq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMpVuYnUJ2mfDEONsVqwvpP_Sfx8upbB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788287173523-6v7g83isgk1jem7a2t1g349siv7m23uq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
