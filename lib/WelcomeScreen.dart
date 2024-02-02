@@ -1,5 +1,6 @@
 import 'package:caress/HomeScreen.dart';
 import 'package:caress/Instruction.dart';
+import 'package:caress/model/user_secret.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +10,7 @@ import 'UserScreen.dart';
 import 'main.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  const WelcomeScreen({super.key});
 
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
@@ -22,6 +23,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   final db = FirebaseFirestore.instance;
 
+  @override
   void initState() {
     super.initState();
     getCurrentUser();
@@ -30,7 +32,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   //using this function you can use the credentials of the user
   void getCurrentUser() async {
     try {
-      final user = await _auth.currentUser;
+      final user = _auth.currentUser;
       if (user != null) {
         loggedinUser = user;
       }
@@ -47,36 +49,34 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   TextEditingController specialist = TextEditingController();
   TextEditingController specialistContact = TextEditingController();
   TextEditingController sex = TextEditingController();
-  TextEditingController chestPain  = TextEditingController();
-  TextEditingController ecg  = TextEditingController();
-  TextEditingController fbs  = TextEditingController();
-  TextEditingController exercise  = TextEditingController();
-  TextEditingController oldpeak  = TextEditingController();
-  TextEditingController slope  = TextEditingController();
-  TextEditingController ca  = TextEditingController();
-  TextEditingController thal  = TextEditingController();
-  TextEditingController lipid  = TextEditingController();
-  TextEditingController hours_of_sleep  = TextEditingController();
-  TextEditingController mood  = TextEditingController();
-  TextEditingController step_count  = TextEditingController();
-  TextEditingController familyDiabetes  = TextEditingController();
-  TextEditingController highBP  = TextEditingController();
-  TextEditingController PhysicallyActive  = TextEditingController();
-  TextEditingController Smoking  = TextEditingController();
-  TextEditingController Alcohol  = TextEditingController();
-  TextEditingController SoundSleep  = TextEditingController();
-  TextEditingController RegularMedicine  = TextEditingController();
-  TextEditingController JunkFood  = TextEditingController();
-  TextEditingController Stress  = TextEditingController();
-  TextEditingController BPLevel  = TextEditingController();
-  TextEditingController Pregancies  = TextEditingController();
-  TextEditingController Pdiabetes  = TextEditingController();
-  TextEditingController UriationFreq  = TextEditingController();
-  TextEditingController BMI  = TextEditingController();
-  TextEditingController calories_burned  = TextEditingController();
-  TextEditingController weight_kg  = TextEditingController();
-
-
+  TextEditingController chestPain = TextEditingController();
+  TextEditingController ecg = TextEditingController();
+  TextEditingController fbs = TextEditingController();
+  TextEditingController exercise = TextEditingController();
+  TextEditingController oldpeak = TextEditingController();
+  TextEditingController slope = TextEditingController();
+  TextEditingController ca = TextEditingController();
+  TextEditingController thal = TextEditingController();
+  TextEditingController lipid = TextEditingController();
+  TextEditingController hours_of_sleep = TextEditingController();
+  TextEditingController mood = TextEditingController();
+  TextEditingController step_count = TextEditingController();
+  TextEditingController familyDiabetes = TextEditingController();
+  TextEditingController highBP = TextEditingController();
+  TextEditingController PhysicallyActive = TextEditingController();
+  TextEditingController Smoking = TextEditingController();
+  TextEditingController Alcohol = TextEditingController();
+  TextEditingController SoundSleep = TextEditingController();
+  TextEditingController RegularMedicine = TextEditingController();
+  TextEditingController JunkFood = TextEditingController();
+  TextEditingController Stress = TextEditingController();
+  TextEditingController BPLevel = TextEditingController();
+  TextEditingController Pregancies = TextEditingController();
+  TextEditingController Pdiabetes = TextEditingController();
+  TextEditingController UriationFreq = TextEditingController();
+  TextEditingController BMI = TextEditingController();
+  TextEditingController calories_burned = TextEditingController();
+  TextEditingController weight_kg = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +85,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     var width = size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fill Your Basic Information'),
+        title: const Text('Fill Your Basic Information'),
         centerTitle: true,
         flexibleSpace: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient:
                   LinearGradient(colors: [Colors.redAccent, Colors.blue])),
         ),
@@ -101,7 +101,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             children: [
               SizedBox(height: height / 20),
               Image(
-                image: AssetImage('assets/brain4.png'),
+                image: const AssetImage('assets/brain4.png'),
                 height: height / 4,
                 width: 0.75 * width,
               ),
@@ -146,7 +146,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 necessaryField: true,
               ),
               SizedBox(height: height / 20),
-              Text(
+              const Text(
                 'If you have any history of mental/health related diagonasis,\nPlease fill the following',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 14, color: Colors.red),
@@ -399,13 +399,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 type: TextInputType.text,
                 necessaryField: false,
               ),
-
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Read Instructions before proceeding!!!',
                     style: TextStyle(color: Colors.red),
                   ),
@@ -414,9 +413,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Instruction()));
+                                builder: (context) => const Instruction()));
                       },
-                      child: Text(
+                      child: const Text(
                         'Instructions Page',
                         style: TextStyle(
                           color: Colors.blue,
@@ -431,7 +430,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                       color: Colors.redAccent.withOpacity(0.8),
-                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(15.0))),
                   child: MaterialButton(
                       elevation: 10.00,
                       minWidth: width / 1.2,
@@ -441,37 +441,69 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             ageOn.text.isEmpty ||
                             friendName.text.isEmpty ||
                             friendContact.text.isEmpty ||
-                            friendPhone.text.isEmpty || sex.text.isEmpty || chestPain.text.isEmpty || ecg.text.isEmpty || fbs.text.isEmpty || exercise.text.isEmpty ||
-                            oldpeak.text.isEmpty || slope.text.isEmpty || ca.text.isEmpty || thal.text.isEmpty || lipid.text.isEmpty || hours_of_sleep.text.isEmpty || mood.text.isEmpty || step_count.text.isEmpty || familyDiabetes.text.isEmpty ||
-                        highBP.text.isEmpty || PhysicallyActive.text.isEmpty || BMI.text.isEmpty || Smoking.text.isEmpty || Smoking.text.isEmpty || Alcohol.text.isEmpty || SoundSleep.text.isEmpty || RegularMedicine.text.isEmpty || JunkFood.text.isEmpty ||
-                        Stress.text.isEmpty || BPLevel.text.isEmpty || Pregancies.text.isEmpty || Pdiabetes.text.isEmpty || UriationFreq.text.isEmpty || calories_burned.text.isEmpty || weight_kg.text.isEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content:
-                                  Text("Fill all the * necessary fields")));
+                            friendPhone.text.isEmpty ||
+                            sex.text.isEmpty ||
+                            chestPain.text.isEmpty ||
+                            ecg.text.isEmpty ||
+                            fbs.text.isEmpty ||
+                            exercise.text.isEmpty ||
+                            oldpeak.text.isEmpty ||
+                            slope.text.isEmpty ||
+                            ca.text.isEmpty ||
+                            thal.text.isEmpty ||
+                            lipid.text.isEmpty ||
+                            hours_of_sleep.text.isEmpty ||
+                            mood.text.isEmpty ||
+                            step_count.text.isEmpty ||
+                            familyDiabetes.text.isEmpty ||
+                            highBP.text.isEmpty ||
+                            PhysicallyActive.text.isEmpty ||
+                            BMI.text.isEmpty ||
+                            Smoking.text.isEmpty ||
+                            Smoking.text.isEmpty ||
+                            Alcohol.text.isEmpty ||
+                            SoundSleep.text.isEmpty ||
+                            RegularMedicine.text.isEmpty ||
+                            JunkFood.text.isEmpty ||
+                            Stress.text.isEmpty ||
+                            BPLevel.text.isEmpty ||
+                            Pregancies.text.isEmpty ||
+                            Pdiabetes.text.isEmpty ||
+                            UriationFreq.text.isEmpty ||
+                            calories_burned.text.isEmpty ||
+                            weight_kg.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content:
+                                      Text("Fill all the * necessary fields")));
                         } else if (!EmailValidator.validate(
                             friendContact.text)) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content:
-                                  Text("Friends mail address is invalid!")));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      "Friends mail address is invalid!")));
                         } else if (!EmailValidator.validate(
                                 specialistContact.text) &&
                             specialistContact.text.isNotEmpty) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content:
-                                  Text("Specialist mail address is invalid!")));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      "Specialist mail address is invalid!")));
                         } else {
-                          db
-                              .collection("Users")
-                              .doc("${patientInfo.email}")
-                              .set(
+                          db.collection("Users").doc("${UserSecret.email}").set(
                             {
                               'name': name.text,
                               'ageOn': ageOn.text,
                               'friend': friendName.text,
                               'friendContact': friendContact.text,
                               'friendPhone': friendPhone.text,
-                              'specialist': specialist.text.isEmpty ? "null" : specialist.text,
-                              'specialistContact': specialistContact.text.isEmpty ? "null" : specialistContact.text,
+                              'specialist': specialist.text.isEmpty
+                                  ? "null"
+                                  : specialist.text,
+                              'specialistContact':
+                                  specialistContact.text.isEmpty
+                                      ? "null"
+                                      : specialistContact.text,
                               'sex': sex.text.isEmpty ? "null" : sex.text,
                               'chestPain': chestPain.text,
                               'ecg': ecg.text,
@@ -482,7 +514,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               'ca': ca.text,
                               'thal': thal.text,
                               'lipid': lipid.text,
-                              'hours_of_sleep': hours_of_sleep.text.isEmpty ? "null" : hours_of_sleep,
+                              'hours_of_sleep': hours_of_sleep.text.isEmpty
+                                  ? "null"
+                                  : hours_of_sleep,
                               'mood': mood.text.isEmpty ? "null" : mood.text,
                               'familyDiabetes': familyDiabetes.text,
                               'highBP': highBP.text,
@@ -498,53 +532,57 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               'Pdiabetes': Pdiabetes.text,
                               'UriationFreq': UriationFreq.text,
                               'BMI': BMI.text,
-                              'calories_burned': calories_burned.text.isEmpty ? "null" : calories_burned.text,
-                              'weight_kg': weight_kg.text.isEmpty ? "null" :weight_kg.text,
-                              'step_count': step_count.text.isEmpty ? "null" : step_count.text,
+                              'calories_burned': calories_burned.text.isEmpty
+                                  ? "null"
+                                  : calories_burned.text,
+                              'weight_kg': weight_kg.text.isEmpty
+                                  ? "null"
+                                  : weight_kg.text,
+                              'step_count': step_count.text.isEmpty
+                                  ? "null"
+                                  : step_count.text,
                             },
                           );
 
-                          patientInfo.name = name.text;
-                          patientInfo.friendName = friendName.text;
-                          patientInfo.friendContact = friendContact.text;
-                          patientInfo.specialistName = specialist.text;
-                          patientInfo.specialistContact =
-                              specialistContact.text;
-                          patientInfo.phoneNo = friendPhone.text;
-                          patientInfo.ageOn = ageOn.text;
-                          patientInfo.sex = sex.text;
-                          patientInfo.chestPain = chestPain.text;
-                          patientInfo.ecg = ecg.text;
-                          patientInfo.fbs = fbs.text;
-                          patientInfo.exercise = exercise.text;
-                          patientInfo.oldpeak = oldpeak.text;
-                          patientInfo.slope = slope.text;
-                          patientInfo.ca = ca.text;
-                          patientInfo.thal = thal.text;
-                          patientInfo.lipid = lipid.text;
-                          patientInfo.hours_of_sleep = hours_of_sleep.text;
-                          patientInfo.mood = mood.text;
-                          patientInfo.step_count = step_count.text;
-                          patientInfo.familyDiabetes = familyDiabetes.text;
-                          patientInfo.highBP = highBP.text;
-                          patientInfo.PhysicallyActive = PhysicallyActive.text;
-                          patientInfo.Smoking = Smoking.text;
-                          patientInfo.Alcohol = Alcohol.text;
-                          patientInfo.SoundSleep = SoundSleep.text;
-                          patientInfo.RegularMedicine = RegularMedicine.text;
-                          patientInfo.JunkFood = JunkFood.text;
-                          patientInfo.Stress = Stress.text;
-                          patientInfo.BPLevel = BPLevel.text;
-                          patientInfo.Pregancies = Pregancies.text;
-                          patientInfo.Pdiabetes = Pdiabetes.text;
-                          patientInfo.UriationFreq = UriationFreq.text;
-                          patientInfo.BMI = BMI.text;
-                          patientInfo.calories_burned = calories_burned.text;
-                          patientInfo.weight_kg = weight_kg.text;
-
+                          UserSecret.name = name.text;
+                          UserSecret.friendName = friendName.text;
+                          UserSecret.friendContact = friendContact.text;
+                          UserSecret.specialistName = specialist.text;
+                          UserSecret.specialistContact = specialistContact.text;
+                          UserSecret.phoneNo = friendPhone.text;
+                          UserSecret.ageOn = ageOn.text;
+                          UserSecret.sex = sex.text;
+                          UserSecret.chestPain = chestPain.text;
+                          UserSecret.ecg = ecg.text;
+                          UserSecret.fbs = fbs.text;
+                          UserSecret.exercise = exercise.text;
+                          UserSecret.oldpeak = oldpeak.text;
+                          UserSecret.slope = slope.text;
+                          UserSecret.ca = ca.text;
+                          UserSecret.thal = thal.text;
+                          UserSecret.lipid = lipid.text;
+                          UserSecret.hoursOfSleep = hours_of_sleep.text;
+                          UserSecret.mood = mood.text;
+                          UserSecret.stepCount = step_count.text;
+                          UserSecret.familyDiabetes = familyDiabetes.text;
+                          UserSecret.highBP = highBP.text;
+                          UserSecret.physicallyActive = PhysicallyActive.text;
+                          UserSecret.smoking = Smoking.text;
+                          UserSecret.alcohol = Alcohol.text;
+                          UserSecret.soundSleep = SoundSleep.text;
+                          UserSecret.regularMedicine = RegularMedicine.text;
+                          UserSecret.junkFood = JunkFood.text;
+                          UserSecret.stepCount = Stress.text;
+                          UserSecret.bpLevel = BPLevel.text;
+                          UserSecret.pregnancies = Pregancies.text;
+                          UserSecret.pdiabetes = Pdiabetes.text;
+                          UserSecret.urinationFreq = UriationFreq.text;
+                          UserSecret.bmi = BMI.text;
+                          UserSecret.caloriesBurned = calories_burned.text;
+                          UserSecret.weightKg = weight_kg.text;
 
                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Data submitted")));
+                              const SnackBar(content: Text("Data submitted")));
 
                           Navigator.push(
                               context,
@@ -552,7 +590,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   builder: (context) => Homescreen()));
                         }
                       },
-                      child: Text(
+                      child: const Text(
                         'Submit',
                         style: TextStyle(color: Colors.white, fontSize: 20.00),
                       )),
@@ -568,14 +606,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
 class TextFieldComponent extends StatelessWidget {
   const TextFieldComponent(
-      {Key? key,
+      {super.key,
       required this.width,
       required this.controller,
       required this.hintText,
       required this.FieldName,
       required this.type,
-      required this.necessaryField})
-      : super(key: key);
+      required this.necessaryField});
 
   final double width;
   final TextEditingController controller;
@@ -587,7 +624,7 @@ class TextFieldComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.only(top: 20),
       child: SizedBox(
         width: width * 0.9,
         child: Column(
@@ -597,13 +634,13 @@ class TextFieldComponent extends StatelessWidget {
               children: [
                 Text(
                   FieldName,
-                  style: TextStyle(fontSize: 15, color: Colors.blue),
+                  style: const TextStyle(fontSize: 15, color: Colors.blue),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 necessaryField
-                    ? Text('*',
+                    ? const Text('*',
                         style: TextStyle(fontSize: 15, color: Colors.red))
-                    : SizedBox()
+                    : const SizedBox()
               ],
             ),
             TextField(
@@ -613,24 +650,24 @@ class TextFieldComponent extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.grey[100],
                 hintText: hintText,
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 15),
+                hintStyle: const TextStyle(color: Colors.grey, fontSize: 15),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.blue,
                     width: 1.0,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     color: Colors.red,
                     width: 2.0,
                   ),
                 ),
               ),
               autofocus: true,
-              style: TextStyle(fontSize: 15, color: Colors.black),
+              style: const TextStyle(fontSize: 15, color: Colors.black),
               cursorColor: Colors.black,
             ),
           ],
