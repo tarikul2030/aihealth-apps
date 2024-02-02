@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'package:caress/model/user_secret.dart';
 import 'package:flutter/material.dart';
 import 'package:caress/HomeScreen.dart';
 import 'package:caress/IntroScreen.dart';
@@ -22,10 +23,10 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         home: Access());
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
 }
 
 class Access extends StatefulWidget {
+  const Access({super.key});
+
   @override
   State<Access> createState() => _AccessState();
 }
@@ -51,9 +54,9 @@ class _AccessState extends State<Access> {
     sharedPreferences = await SharedPreferences.getInstance();
 
     try {
-      if (sharedPreferences.getString("caress101") != null) {
+      if (sharedPreferences.getString("email") != null) {
         setState(() {
-          patientInfo.email = sharedPreferences.getString("caress101")!;
+          UserSecret.email = sharedPreferences.getString("email")!;
           userAvailable = true;
         });
       }
@@ -66,12 +69,12 @@ class _AccessState extends State<Access> {
 
   @override
   Widget build(BuildContext context) {
-    return userAvailable ? Homescreen() : Intro();
+    return userAvailable ? Homescreen() : const Intro();
   }
 }
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -92,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
     var height = screenSize.height;
     return Scaffold(
         appBar: AppBar(
-          title: Text('Caress'),
+          title: const Text('Caress'),
           centerTitle: true,
           backgroundColor: Colors.redAccent.withOpacity(0.8),
         ),
@@ -103,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               children: <Widget>[
                 Image(
-                  image: AssetImage('assets/imagee.png'),
+                  image: const AssetImage('assets/imagee.png'),
                   height: height / 4,
                   width: 0.75 * width,
                 ),
@@ -138,10 +141,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: Icon(Icons.perm_identity, color: color),
                       hintText: 'Enter your Email',
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30.0)),
                           borderSide: BorderSide(color: color)),
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30.0)),
                           borderSide: BorderSide(width: 2, color: color)),
                     ),
                   ),
@@ -164,10 +169,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: Icon(Icons.password, color: color),
                       hintText: 'Enter your Password',
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30.0)),
                           borderSide: BorderSide(color: color)),
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(30.0)),
                           borderSide: BorderSide(width: 2, color: color)),
                     ),
                   ),
@@ -180,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                         color: Colors.redAccent.withOpacity(0.8),
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(45.0),
                         )),
                     child: MaterialButton(
@@ -189,47 +196,51 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: height / 11.5,
                         onPressed: () async {
                           setState(() {
-                            patientInfo.email = email;
+                            UserSecret.email = email;
                           });
                           if (email.isNotEmpty && password.isNotEmpty) {
                             if (password.length < 6) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                       content: Text(
                                           'Password must contain 6 letters')));
                             } else if (!EmailValidator.validate(email)) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                       content: Text('Email is not valid')));
                             } else {
                               final user =
                                   await _auth.signInWithEmailAndPassword(
                                       email: email, password: password);
+
+                              print(user);
                               sharedPreferences =
                                   await SharedPreferences.getInstance();
-                              sharedPreferences.setString("caress101", email);
+                              sharedPreferences.setString("email", email);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => WelcomeScreen()));
+                                      builder: (context) =>
+                                          const WelcomeScreen()));
                             }
                           } else if (password.isEmpty || email.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                content: Text('Fill both the values')));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Fill both the values')));
                           }
                         },
-                        child: Text(
+                        child: const Text(
                           'Login',
                           style:
                               TextStyle(color: Colors.white, fontSize: 20.00),
                         )),
                   ),
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Don't have an account?",
                       textScaleFactor: 1,
                       style: TextStyle(
@@ -241,7 +252,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SignUp()));
+                                  builder: (context) => const SignUp()));
                         },
                         child: Text(
                           'Sign Up',
@@ -255,48 +266,4 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ));
   }
-}
-
-class patientInfo {
-  static String? name;
-  static String? ageOn;
-  static String? email;
-  static String? phoneNo;
-  static String? friendName;
-  static String? specialistName;
-  static String? friendContact;
-  static String? specialistContact;
-  static String? profile_link;
-  static String? sex;
-  static String? chestPain;
-  static String? ecg;
-  static String? fbs;
-  static String? exercise;
-  static String? oldpeak;
-  static String? slope;
-  static String? ca;
-  static String? thal;
-  static String? lipid;
-  static String? hours_of_sleep;
-  static String? mood;
-  static String? familyDiabetes;
-  static String? highBP;
-  static String? PhysicallyActive;
-  static String? Smoking;
-  static String? Alcohol;
-  static String? SoundSleep;
-  static String? RegularMedicine;
-  static String? JunkFood;
-  static String? Stress;
-  static String? BPLevel;
-  static String? Pregancies;
-  static String? Pdiabetes;
-  static String? UriationFreq;
-  static String? BMI;
-  static String? calories_burned;
-  static String? weight_kg;
-  static String? step_count;
-
-
-
 }

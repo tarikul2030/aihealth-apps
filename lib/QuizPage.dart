@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:caress/model/user_secret.dart';
+
 import 'main.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -200,12 +202,12 @@ class _QuestionState extends State<Question> {
                                 : ans >= widget.qno / 2
                                     ? "Moderate"
                                     : "Low";
-                            print(patientInfo.specialistContact);
+                            print(UserSecret.specialistContact);
                             sendEmail(
-                                patientInfo.name!,
-                                patientInfo.specialistName!,
-                                'Your patient has taken an ${widget.disorder} test. He/she has ${risk} risk of suffering through the disorder. Kindly share your advice on ${patientInfo.email} or contact him personally',
-                                patientInfo.specialistContact!);
+                                UserSecret.name!,
+                                UserSecret.specialistName!,
+                                'Your patient has taken an ${widget.disorder} test. He/she has ${risk} risk of suffering through the disorder. Kindly share your advice on ${UserSecret.email} or contact him personally',
+                                UserSecret.specialistContact!);
                           }
                         });
                       },

@@ -2,6 +2,8 @@ import 'package:caress/ArticlesPage.dart';
 import 'package:caress/ProfilePage.dart';
 import 'package:caress/UserScreen.dart';
 import 'package:caress/main.dart';
+import 'package:caress/model/patient_info.dart';
+import 'package:caress/model/user_secret.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -45,16 +47,16 @@ class _HomescreenState extends State<Homescreen> {
   void getcredentials() async {
     DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection('Users')
-        .doc('${patientInfo.email}')
+        .doc('${UserSecret.email}')
         .get();
     setState(() {
-      patientInfo.name = doc['name'];
-      patientInfo.friendName = doc['friend'];
-      patientInfo.friendContact = doc['friendContact'];
-      patientInfo.phoneNo = doc['friendPhone'];
-      patientInfo.ageOn = doc['ageOn'];
-      patientInfo.specialistName = doc['specialist'];
-      patientInfo.specialistContact = doc['specialistContact'];
+      UserSecret.name = doc['name'];
+      UserSecret.friendName = doc['friend'];
+      UserSecret.friendContact = doc['friendContact'];
+      UserSecret.phoneNo = doc['friendPhone'];
+      UserSecret.ageOn = doc['ageOn'];
+      UserSecret.specialistName = doc['specialist'];
+      UserSecret.specialistContact = doc['specialistContact'];
     });
   }
 

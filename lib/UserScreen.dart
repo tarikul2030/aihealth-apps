@@ -8,6 +8,7 @@ import 'package:caress/Predictiond.dart';
 import 'package:caress/Predictions.dart';
 import 'package:caress/Predictiondi.dart';
 import 'package:caress/main.dart';
+import 'package:caress/model/user_secret.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -274,9 +275,9 @@ class _UserDataState extends State<UserData> {
               onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
             ),
             TextButton(
-              child: Text('Call ${patientInfo.friendName}'),
+              child: Text('Call ${UserSecret.friendName}'),
               onPressed: () {
-                FlutterPhoneDirectCaller.callNumber(patientInfo.phoneNo!);
+                FlutterPhoneDirectCaller.callNumber(UserSecret.phoneNo!);
               },
             ),
           ],
@@ -317,9 +318,9 @@ class _UserDataState extends State<UserData> {
               onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
             ),
             TextButton(
-              child: Text('Call ${patientInfo.friendName}'),
+              child: Text('Call ${UserSecret.friendName}'),
               onPressed: () {
-                FlutterPhoneDirectCaller.callNumber(patientInfo.phoneNo!);
+                FlutterPhoneDirectCaller.callNumber(UserSecret.phoneNo!);
               },
             ),
           ],
@@ -368,16 +369,16 @@ class _UserDataState extends State<UserData> {
     Timer.periodic(Duration(hours: 3), (timer) {
       if (c == 1) {
         sendEmail(
-          patientInfo.name!,
-          patientInfo.friendName!,
-          'Your friend ${patientInfo.name} had an anxiety attack',
-          patientInfo.friendContact!,
+          UserSecret.name!,
+          UserSecret.friendName!,
+          'Your friend ${UserSecret.name} had an anxiety attack',
+          UserSecret.friendContact!,
         );
         sendEmail(
-          patientInfo.name!,
-          patientInfo.specialistName!,
-          'Your patient ${patientInfo.name} had an anxiety attack',
-          patientInfo.specialistContact!,
+          UserSecret.name!,
+          UserSecret.specialistName!,
+          'Your patient ${UserSecret.name} had an anxiety attack',
+          UserSecret.specialistContact!,
         );
         c = 0;
       }
@@ -411,7 +412,7 @@ class _UserDataState extends State<UserData> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Hey!! ${patientInfo.name}, Welcome to Caress',
+                          'Hey!! ${UserSecret.name}, Welcome to Caress',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -679,19 +680,19 @@ class _MenuState extends State<Menu> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => Prediction(
-                              patientInfo.ageOn!,
-                              patientInfo.sex!,
-                              patientInfo.chestPain!,
+                              UserSecret.ageOn!,
+                              UserSecret.sex!,
+                              UserSecret.chestPain!,
                               _bp_s!,
-                              patientInfo.lipid!,
-                              patientInfo.fbs!,
-                              patientInfo.ecg!,
+                              UserSecret.lipid!,
+                              UserSecret.fbs!,
+                              UserSecret.ecg!,
                               _aiheart_rate!,
-                              patientInfo.exercise!,
-                              patientInfo.oldpeak!,
-                              patientInfo.slope!,
-                              patientInfo.ca!,
-                              patientInfo.thal!)));
+                              UserSecret.exercise!,
+                              UserSecret.oldpeak!,
+                              UserSecret.slope!,
+                              UserSecret.ca!,
+                              UserSecret.thal!)));
                 },
               ),
               SizedBox(
@@ -719,10 +720,10 @@ class _MenuState extends State<Menu> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => Predictiond(
-                              patientInfo.step_count!,
-                              patientInfo.mood!,
+                              UserSecret.stepCount!,
+                              UserSecret.mood!,
                               _caloriesburned!,
-                              patientInfo.hours_of_sleep!,
+                              UserSecret.hoursOfSleep!,
                               _weight!)));
                 },
               ),
@@ -779,23 +780,23 @@ class _MenuState extends State<Menu> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => Predictiondi(
-                              patientInfo.ageOn!,
-                              patientInfo.sex!,
-                              patientInfo.familyDiabetes!,
-                              patientInfo.highBP!,
-                              patientInfo.PhysicallyActive!,
-                              patientInfo.BMI!,
-                              patientInfo.Smoking!,
-                              patientInfo.Alcohol!,
-                              patientInfo.hours_of_sleep!,
-                              patientInfo.SoundSleep!,
-                              patientInfo.RegularMedicine!,
-                              patientInfo.JunkFood!,
-                              patientInfo.Stress!,
-                              patientInfo.BPLevel!,
-                              patientInfo.Pregancies!,
-                              patientInfo.Pdiabetes!,
-                              patientInfo.UriationFreq!)));
+                              UserSecret.ageOn!,
+                              UserSecret.sex!,
+                              UserSecret.familyDiabetes!,
+                              UserSecret.highBP!,
+                              UserSecret.physicallyActive!,
+                              UserSecret.bmi!,
+                              UserSecret.smoking!,
+                              UserSecret.alcohol!,
+                              UserSecret.hoursOfSleep!,
+                              UserSecret.soundSleep!,
+                              UserSecret.regularMedicine!,
+                              UserSecret.junkFood!,
+                              UserSecret.stress!,
+                              UserSecret.bpLevel!,
+                              UserSecret.pregnancies!,
+                              UserSecret.pdiabetes!,
+                              UserSecret.urinationFreq!)));
                 },
               ),
               SizedBox(height: height / 2),

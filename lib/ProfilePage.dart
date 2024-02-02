@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:caress/main.dart';
+import 'package:caress/model/user_secret.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -31,19 +32,19 @@ class _ProfileState extends State<Profile> {
 
     Reference ref = await FirebaseStorage.instance
         .ref()
-        .child("${patientInfo.name}_profile.jpg");
+        .child("${UserSecret.name}_profile.jpg");
 
     await ref.putFile(File(image!.path));
 
     ref.getDownloadURL().then((value) async {
       setState(() {
-        patientInfo.profile_link = value;
+        UserSecret.profile_link = value;
       });
 
       await FirebaseFirestore.instance
           .collection('Users')
-          .doc('${patientInfo.email}')
-          .update({'profilePic': patientInfo.profile_link});
+          .doc('${UserSecret.email}')
+          .update({'profilePic': UserSecret.profile_link});
     });
   }
 
@@ -51,14 +52,14 @@ class _ProfileState extends State<Profile> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    friendName.text = patientInfo.friendName!;
-    specialistName.text = patientInfo.specialistName!;
-    friendContact.text = patientInfo.friendContact!;
-    specialistContact.text = patientInfo.specialistContact!;
-    friendPhone.text = patientInfo.phoneNo!;
-    ageOn.text = patientInfo.ageOn!;
-    sex.text = patientInfo.sex!;
-    mood.text = patientInfo.mood!;
+    friendName.text = UserSecret.friendName!;
+    specialistName.text = UserSecret.specialistName!;
+    friendContact.text = UserSecret.friendContact!;
+    specialistContact.text = UserSecret.specialistContact!;
+    friendPhone.text = UserSecret.phoneNo!;
+    ageOn.text = UserSecret.ageOn!;
+    sex.text = UserSecret.sex!;
+    mood.text = UserSecret.mood!;
   }
 
   @override
@@ -96,15 +97,15 @@ class _ProfileState extends State<Profile> {
                         },
                         child: CircleAvatar(
                           radius: height / 12,
-                          child: patientInfo.profile_link == null
+                          child: UserSecret.profile_link == null
                               ? Icon(
                                   Icons.person,
                                   color: Colors.white,
                                   size: 60,
                                 )
                               : null,
-                          backgroundImage: patientInfo.profile_link != null
-                              ? NetworkImage(patientInfo.profile_link!)
+                          backgroundImage: UserSecret.profile_link != null
+                              ? NetworkImage(UserSecret.profile_link!)
                               : null,
                           backgroundColor: Colors.blueGrey,
                         ),
@@ -116,7 +117,7 @@ class _ProfileState extends State<Profile> {
               SizedBox(height: height / 14.5),
               Container(
                 child: Text(
-                  patientInfo.name!,
+                  UserSecret.name!,
                   style: TextStyle(fontSize: 30),
                 ),
               ),
@@ -130,8 +131,8 @@ class _ProfileState extends State<Profile> {
                               "Enter your Friends Email", friendContact, true),
                           TextsField("Friend's Phone",
                               "Enter your Friends Phone", friendPhone, true),
-                    TextsField("Friend's Age",
-                        "Enter your Friends Age", ageOn, true),
+                          TextsField("Friend's Age", "Enter your Friends Age",
+                              ageOn, true),
                           TextsField(
                               "Specialist Name",
                               "Enter Name of the Specialist",
@@ -142,8 +143,8 @@ class _ProfileState extends State<Profile> {
                               "Enter Specialists contact No.",
                               specialistContact,
                               true),
-                    TextsField("sex's Age",
-                        "Enter your Friends Age", ageOn, true),
+                          TextsField("sex's Age", "Enter your Friends Age",
+                              ageOn, true),
                         ]
                       : [
                           TextsField("Friends Name", '', friendName, false),
@@ -152,7 +153,7 @@ class _ProfileState extends State<Profile> {
                           TextsField("Friend's Phone", "", friendPhone, false),
                           TextsField("Friend's Phone", "", ageOn, false),
                           TextsField("Friend's sex", "", sex, false),
-                    TextsField("Friend's mood", "", mood, false),
+                          TextsField("Friend's mood", "", mood, false),
                           TextsField(
                               "Specialist Name", '', specialistName, false),
                           TextsField("Specialist's Contact", '',
@@ -188,11 +189,10 @@ class _ProfileState extends State<Profile> {
                             showSnackBar("Please Enter your Friends age No");
                           } else if (sex.text.isEmpty) {
                             showSnackBar("Please Enter your Friends sex No");
-                          }
-                          else {
+                          } else {
                             await FirebaseFirestore.instance
                                 .collection('Users')
-                                .doc(patientInfo.email)
+                                .doc(UserSecret.email)
                                 .update({
                               'friend': friendName.text,
                               'friendContact': friendContact.text,
@@ -202,16 +202,16 @@ class _ProfileState extends State<Profile> {
                               'specialistContact': specialistContact.text,
                               'mood': mood.text,
                             });
-                            patientInfo.friendName = friendName.text;
-                            patientInfo.friendContact = friendContact.text;
-                            patientInfo.phoneNo = friendPhone.text;
-                            patientInfo.ageOn = ageOn.text;
-                            patientInfo.sex = sex.text;
-                            patientInfo.mood = mood.text;
-                            patientInfo.specialistName = specialistName.text;
-                            patientInfo.specialistContact =
+                            UserSecret.friendName = friendName.text;
+                            UserSecret.friendContact = friendContact.text;
+                            UserSecret.phoneNo = friendPhone.text;
+                            UserSecret.ageOn = ageOn.text;
+                            UserSecret.sex = sex.text;
+                            UserSecret.mood = mood.text;
+                            UserSecret.specialistName = specialistName.text;
+                            UserSecret.specialistContact =
                                 specialistContact.text;
-                            print(patientInfo.specialistContact);
+                            print(UserSecret.specialistContact);
                           }
                         },
                         child: Text(
